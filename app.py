@@ -119,6 +119,23 @@ st.markdown("""
     .prod-name { font-weight: 600; color: #333 !important; font-size: 0.9rem; margin-bottom: 5px; }
     .prod-price { color: #00a650 !important; font-weight: 800; font-size: 1.2rem; }
     .prod-id { color: #aaa !important; font-size: 0.7rem; }
+    /* Ocultar botão de Deploy e Gerenciar */
+    .stAppDeployButton {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    
+    /* Ocultar menu superior direito (opcional) */
+    [data-testid="stToolbar"] {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    
+    /* Ocultar rodapé padrão do Streamlit */
+    footer {
+        visibility: hidden !important;
+        display: none !important;
+    }
     
     </style>
 """, unsafe_allow_html=True)
@@ -224,4 +241,5 @@ if st.session_state.messages[-1]["role"] == "user":
 
 
         st.session_state.messages.append({"role": "assistant", "content": resp})
+
 
