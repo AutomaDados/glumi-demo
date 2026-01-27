@@ -3,9 +3,25 @@ import pandas as pd
 import google.generativeai as genai
 import os
 import re
-from dotenv import load_dotenv
 
-# --- 0. CONFIGURAÇÃO ---
+# --- CONFIGURAÇÃO BLINDADA (Lê direto da Nuvem) ---
+try:
+    if "GEMINI_API_KEY" in st.secrets:
+        api_key = st.secrets["GEMINI_API_KEY"]
+    else:
+        # Se não achar, tenta variável de ambiente (backup)
+        api_key = os.getenv("GEMINI_API_KEY")
+except FileNotFoundError:
+    api_key = None
+
+# Se a chave estiver vazia, avisa na tela
+if not api_key:
+    st.error("🚨 ERRO CRÍTICO: Não encontrei a chave 'GEMINI_API_KEY' nos Secrets.")
+    st.info("Vá em 'Manage App' > 'Settings' > 'Secrets' e verifique se está assim: GEMINI_API_KEY = \"sua_chave\"")
+    st.stop()
+
+# Configura a IA
+genai.configure(api_key=api_key)
 load_dotenv()
 st.set_page_config(page_title="Glumi", page_icon="🛍️", layout="centered")
 
@@ -205,5 +221,6 @@ if st.session_state.messages[-1]["role"] == "user":
                                 st.image("https://via.placeholder.com/100", use_container_width=True)
                         with col_txt:
                             st.markdown(html_card, unsafe_allow_html=True)
+
 
         st.session_state.messages.append({"role": "assistant", "content": resp})
