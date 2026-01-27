@@ -22,7 +22,7 @@ if not api_key:
 
 # Configura a IA
 genai.configure(api_key=api_key)
-load_dotenv()
+
 st.set_page_config(page_title="Glumi", page_icon="🛍️", layout="centered")
 
 # --- CSS: CORES DA MARCA GLUMI (FINAL) ---
@@ -224,3 +224,4 @@ if st.session_state.messages[-1]["role"] == "user":
 
 
         st.session_state.messages.append({"role": "assistant", "content": resp})
+
