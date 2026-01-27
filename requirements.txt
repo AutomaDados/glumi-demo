@@ -1,4 +1,4 @@
-echo streamlit
-echo pandas
-echo google-generativeai
-echo python-dotenv
+streamlit
+pandas
+google-generativeai
+python-dotenv
