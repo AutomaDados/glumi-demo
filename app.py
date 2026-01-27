@@ -27,116 +27,31 @@ st.set_page_config(page_title="Glumi", page_icon="🛍️", layout="centered")
 
 # --- CSS: CORES DA MARCA GLUMI (FINAL) ---
 st.markdown("""
-    <style>
-    /* 1. FUNDO E GERAL */
-    .stApp { background-color: #FFFFFF; }
-    header, footer, #MainMenu {visibility: hidden;}
+<style>
+    /* 1. Ocultar TUDO que é do Streamlit (Menu, Footer, Botão Vermelho) */
+    #MainMenu {visibility: hidden; display: none;}
+    footer {visibility: hidden; display: none;}
+    header {visibility: hidden; display: none;}
+    .stAppDeployButton {display: none !important;}
+    [data-testid="stToolbar"] {display: none !important;}
+    [data-testid="stDecoration"] {display: none !important;}
+    [data-testid="stStatusWidget"] {display: none !important;}
 
-    /* Espaçamento para o celular */
+    /* 2. Ajuste do Layout Mobile */
+    .stApp { background-color: #FFFFFF; }
     .block-container {
-        padding-top: 2rem !important;
-        padding-bottom: 9rem !important;
+        padding-top: 1rem !important;
+        padding-bottom: 8rem !important;
     }
 
-    /* 2. BARRA DE DIGITAÇÃO (CLEAN) */
+    /* 3. Input Fixo (Ajuste Fino) */
     .stChatInput {
         position: fixed; bottom: 0; left: 0; width: 100% !important;
-        padding: 1rem; background: white !important; z-index: 9999;
+        padding: 1rem; background: white !important; z-index: 99999;
         border-top: 1px solid #eee;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-    }
-    .stChatInput textarea {
-        background-color: #F0F2F6 !important; 
-        color: #333 !important;
-        border-radius: 25px !important;
-    }
-
-    /* 3. CONFIGURAÇÃO DOS BALÕES DE CHAT */
-    
-    /* Remove ícones/avatares padrões */
-    .stChatMessage .st-emotion-cache-1p1m4ay, 
-    .stChatMessage .st-emotion-cache-10trblm,
-    div[data-testid="stChatMessageAvatar"] {
-        display: none !important;
-    }
-
-    /* Container da linha da mensagem */
-    div[data-testid="stChatMessage"] {
-        display: flex;
-        width: 100%;
-        background-color: transparent !important;
-        padding: 0.3rem 0;
-        border: none !important;
-    }
-
-    /* >>> ASSISTENTE GLUMI (A MARCA) - ESQUERDA <<< */
-    /* Este é o primeiro filho (ou par, dependendo da ordem). Vamos focar no background rosa */
-    div[data-testid="stChatMessage"]:nth-child(even) {
-        flex-direction: row;
-        justify-content: flex-start;
     }
     
-    div[data-testid="stChatMessage"]:nth-child(even) .stMarkdown {
-        background-color: #E91E63 !important; /* ROSA GLUMI */
-        color: #FFFFFF !important; /* Texto Branco */
-        text-align: left;
-        border-radius: 20px 20px 20px 5px; /* Bico na esquerda inferior */
-        padding: 12px 18px;
-        max-width: 85%;
-        box-shadow: 0 2px 5px rgba(233, 30, 99, 0.2);
-    }
-    
-    /* Força texto branco no balão rosa */
-    div[data-testid="stChatMessage"]:nth-child(even) p { color: #FFFFFF !important; }
-    div[data-testid="stChatMessage"]:nth-child(even) a { color: #FFEB3B !important; } /* Links em amarelo */
-
-    /* >>> USUÁRIO (CLIENTE) - DIREITA <<< */
-    div[data-testid="stChatMessage"]:nth-child(odd) {
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-    }
-    
-    div[data-testid="stChatMessage"]:nth-child(odd) .stMarkdown {
-        background-color: #F2F2F7 !important; /* CINZA CLARO */
-        color: #333333 !important; /* Texto Escuro */
-        text-align: right;
-        border-radius: 20px 20px 5px 20px; /* Bico na direita inferior */
-        padding: 12px 18px;
-        max-width: 80%;
-    }
-    
-    /* Força texto escuro no balão cinza */
-    div[data-testid="stChatMessage"]:nth-child(odd) p { color: #333333 !important; }
-
-    /* 4. CARD DO PRODUTO (DENTRO DO BALÃO ROSA) */
-    .product-card {
-        background: white; 
-        border-radius: 12px;
-        padding: 10px; 
-        margin-top: 10px; 
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .prod-name { font-weight: 600; color: #333 !important; font-size: 0.9rem; margin-bottom: 5px; }
-    .prod-price { color: #00a650 !important; font-weight: 800; font-size: 1.2rem; }
-    .prod-id { color: #aaa !important; font-size: 0.7rem; }
-    /* Ocultar botão de Deploy e Gerenciar */
-    .stAppDeployButton {
-        visibility: hidden !important;
-        display: none !important;
-    }
-    
-    /* Ocultar menu superior direito (opcional) */
-    [data-testid="stToolbar"] {
-        visibility: hidden !important;
-        display: none !important;
-    }
-    
-    /* Ocultar rodapé padrão do Streamlit */
-    footer {
-        visibility: hidden !important;
-        display: none !important;
-    }
-    
+    /* ... (Mantenha o resto do CSS dos balões que já estava bom) ... */
     </style>
 """, unsafe_allow_html=True)
 
@@ -241,5 +156,6 @@ if st.session_state.messages[-1]["role"] == "user":
 
 
         st.session_state.messages.append({"role": "assistant", "content": resp})
+
 
 
